@@ -1,0 +1,17 @@
+{
+  "name": "k6-typescript-framework",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:go-automate/k6-typescript-framework.git",
+  "author": "Simon Stratton <simon.stratton@safebear.co.uk>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/k6": "^0.25.1",
+    "@types/node": "^13.7.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  }
+}
