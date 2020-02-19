@@ -9,7 +9,7 @@ import { User } from '../lib/types/users'
 
 import * as crocodileOwnerActions from '../actions/roles/crocodile-owner.role'
 import * as adminActions from '../actions/roles/admin.role'
-import * as publicUserActions from '../actions/roles/publicUser.role'
+import * as publicUserActions from '../actions/roles/public-user.role'
 
 
 // Test Options https://docs.k6.io/docs/options
