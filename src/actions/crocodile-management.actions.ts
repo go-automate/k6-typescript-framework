@@ -33,7 +33,7 @@ export function updateCrocodile( _requestConfigWithTag: any, _url: string, _newN
     const res = http.patch(_url, payload, _requestConfigWithTag({ name: 'Update' }));
     const isSuccessfulUpdate = check(res, {
       'Update worked': () => res.status === 200,
-      'Updated name is correct': () => res.json('name') === 'New name',
+      'Updated name is correct': () => res.json('name') === 'New Name',
     });
 
     // if checks failed, log this.
@@ -77,6 +77,12 @@ export function queryCrocodiles(_url: string): RefinedResponse<"text">[]{
         ['GET', `${_url}/public/crocodiles/4/`, null, {tags: {name: 'PublicCrocs'}}],
       ]);
 
+      for(let i=0; i < responses.length; i++){
+        check(responses[i], {
+          'Query successful': () => responses[i].status === 200
+        });
+      }
+
     });
 
     setSleep(0.5, 1);
@@ -86,7 +92,7 @@ export function queryCrocodiles(_url: string): RefinedResponse<"text">[]{
 
 export function checkAges(_responses: RefinedResponse<"text">[], _minAge: number ){
 
-  group('Check ages', () => {
+  group('Functional Test: Check ages', () => {
         // get all the ages out of each of the responses
         const ages: JSONValue[] = Object.values(_responses).map(res => res.json('age'));
   

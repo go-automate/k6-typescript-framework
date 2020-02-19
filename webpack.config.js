@@ -18,7 +18,7 @@ module.exports = {
 
     output: {
 
-        path: path.resolve(__dirname, 'extended_webpack'),
+        path: path.resolve(__dirname, 'dist'),
 
         libraryTarget: 'commonjs',
 

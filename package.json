@@ -9,7 +9,8 @@
     "check-types": "tsc",
     "check-types:watch": "tsc --watch",
     "build": "webpack",
-    "run": ""
+    "test": "./run.sh",
+    "go": "yarn build && yarn test"
   },
   "dependencies": {
     "@types/k6": "^0.25.1",

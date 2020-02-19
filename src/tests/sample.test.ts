@@ -22,14 +22,14 @@ export let options: Partial<Options> = {
   thresholds: {
     'http_req_duration': ['p(95)<500', 'p(99)<1500'],
     'http_req_duration{name:PublicCrocs}': ['avg<400'],
-    'http_req_duration{name:Create}': ['avg<600', 'max<1000'],
+    'http_req_duration{name:Create}': ['avg<600', 'max<2000'],
   },
 };
 
 const CROCODILE_OWNER: User = {
   first_name: "Crocodile",
   last_name: "Owner",
-  username: `${randomString(10)}@example.com`;  // Set your own email or `${randomString(10)}@example.com`;,
+  username: `${randomString(10)}@example.com`,  // Set your own email or `${randomString(10)}@example.com`;,
   password: 'superCroc2019'
 }
 
