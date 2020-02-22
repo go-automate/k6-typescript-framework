@@ -10,8 +10,11 @@
     "check-types:watch": "tsc --watch",
     "monitors": "docker-compose up -d influxdb grafana",
     "build": "webpack",
-    "test": "docker-compose run --rm k6 run /scripts/sampleTest.bundle.js",
-    "go": "yarn build && yarn test"
+    "test": "docker-compose run --rm k6 run /scripts/soakTest.bundle.js",
+    "seed": "docker-compose run --rm k6 run /scripts/seedCrocs.bundle.js",
+    "loadtest:queries": "docker-compose run -d --rm k6 run /scripts/loadQueries.bundle.js & docker-compose run --rm k6 run /scripts/soakTest.bundle.js",
+    "go:docker": "yarn build && yarn test",
+    "go:k6": "yarn build && k6 run src/tests/query-crocs.load.ts"
   },
   "dependencies": {
     "@types/k6": "^0.25.1",
