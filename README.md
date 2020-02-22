@@ -9,7 +9,7 @@ Clone this repository and open in the IDE of your choice.
 
 Install dependencies using `yarn install` in the terminal (you need to have [yarn](https://yarnpkg.com/getting-started/install) installed on your machine).
 
-Now run the test using the `yarn go:docker` command. This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using `k6`.
+Now run the test using the `yarn go:k6` command. This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using `k6`.
 
 ### Run with Monitoring
 
@@ -64,7 +64,9 @@ This is where you create your performance tests using the modules from the rest 
 
 ## Checking your Code
 
-`yarn check-types` and `yarn check-types:watch`
+Use `yarn check-types` to check your code against type safety and the rules set in your [tsconfig.json file](tsconfig.json). You can also have this running while you work using `yarn check-types:watch`.
+
+**PLEASE NOTE** I haven't set up `ESLint` and `Prettier` which this framework, but it's recommended that you do so.
 
 ## Building your Code
 
