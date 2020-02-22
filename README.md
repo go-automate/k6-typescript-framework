@@ -50,6 +50,8 @@ All the code can be found in the `src` folder. And is written in TypeScript usin
 
 Within this folder, the `lib` folder contains bespoke `types` and helper functions. It's highly recommended that you unit test your helper functions (e.g. with [Jest](https://jestjs.io/)). However I've not done that here, just to keep things simple.
 
+To understand the k6 types, take a look at the [Definitely Typed Repository](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/k6)
+
 ### **actions** folder
 
 The `actions` folder contains the requests for each user action. The `roles` folder (inside the `actions` folder) contains a file for each user type and the actions they can perform.
@@ -78,12 +80,9 @@ It's easy to debug `k6` scripts. See the [k6 documentation](https://docs.k6.io/d
 
 ## Running in CI/CD Pipelines
 
-`k6` has been designed to work with your `CI/CD` pipeline whatever tool you're using. There are examples for [GitLab](https://blog.loadimpact.com/integrating-load-testing-with-gitlab), [CircleCI](https://github.com/loadimpact/k6-circleci-example), [Jenkins](https://github.com/loadimpact/k6-jenkins-example) and many others. 
+`k6` has been designed to work with your `CI/CD` pipeline whatever tool you're using. There are examples for [GitHub Actions](https://blog.loadimpact.com/load-testing-using-github-actions), [GitLab](https://blog.loadimpact.com/integrating-load-testing-with-gitlab), [CircleCI](https://github.com/loadimpact/k6-circleci-example), [Jenkins](https://github.com/loadimpact/k6-jenkins-example) and many others. 
 
 
+## Problems with this Framework
 
-
-
-
-
-
+If you notice any problems or improvements that could be made to this example framework, I accept PRs or you can raise an issue on the [k6 community forum](https://community.k6.io/)

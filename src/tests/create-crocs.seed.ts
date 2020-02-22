@@ -14,7 +14,9 @@ import * as publicUserActions from '../actions/roles/public-user.role'
 /**
  * This is a SEEDING script. Do not run as a performance test. 
  * 
- * It creates crocodiles for use by the performance tests.
+ * It creates crocodiles on the following app:
+ * https://test-api.loadimpact.com/
+ * for use by the performance tests (a Soak test in this case).
  */
 
 // Test Options https://docs.k6.io/docs/options

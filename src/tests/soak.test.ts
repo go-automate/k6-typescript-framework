@@ -11,6 +11,14 @@ import * as crocodileOwnerActions from '../actions/roles/crocodile-owner.role'
 import * as adminActions from '../actions/roles/admin.role'
 import * as publicUserActions from '../actions/roles/public-user.role'
 
+/**
+ * A soak test that runs through some common user actions 
+ * for the Crocodile App:
+ * https://test-api.loadimpact.com/
+ * 
+ * P.s. the k6 Types can be found here for reference: 
+ * https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/k6
+ */
 
 // Test Options https://docs.k6.io/docs/options
 export let options: Partial<Options> = {

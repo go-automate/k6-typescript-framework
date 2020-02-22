@@ -6,12 +6,16 @@ import { setSleep } from '../lib/sleep.helpers'
 import * as publicUserActions from '../actions/roles/public-user.role'
 
 /**
- * This is an example LOAD script. Do not run it on its own. 
+ * This is an example LOAD script. 
  * 
- * It queries crocodiles while another script is running some BAU activity (which may include querying crocodiles) 
+ * It queries crocodiles from the following app:
+ * https://test-api.loadimpact.com/
+ * 
+ * It is usually run while another performance test is running some BAU activity 
  * to see if querying crocodiles impacts the overall performance of the system.
  * 
- * Can be used in conjunction with a LOAD script that adds crocodiles to the system.
+ * Can be used in conjunction with other LOAD scripts, e.g. one that adds 
+ * crocodiles to the system.
  */
 
 // Test Options https://docs.k6.io/docs/options
