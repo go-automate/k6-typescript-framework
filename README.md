@@ -11,7 +11,7 @@ Install dependencies using `yarn install` in the terminal (you need to have [yar
 
 Now run the test using the `yarn go:k6` command. This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using `k6`.
 
-### Run with Monitoring
+### Run with Monitoring :chart_with_upwards_trend:
 
 Ensure you have [docker](https://www.docker.com/products/docker-desktop) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine.
 
@@ -32,13 +32,13 @@ This is an example of a script that you could use to 'seed' the application with
 
 The `yarn loadtest:queries` will run two scripts simultaneously. The main [soak.test.ts](src/tests/soak.test.ts) script will be run, alongside the [query-crocs.load.ts](/src/tests/query-crocs.load.ts) script, which will be run in the background applying load to the system.
 
-## The Test Framework
+## The Test Framework :white_check_mark:
 
 The test is based on the following sample script and API provided by k6:
 
 https://test-api.loadimpact.com/
 
-This is a dummy application/api for people who own crocodiles to keep track of their crocodiles. In the test we will create a user, query crocodiles, and create, update and delete a crocodile. The test also include [thresholds](https://docs.k6.io/docs/thresholds) and [checks](https://docs.k6.io/docs/checks)
+This is a dummy application/api for people who own crocodiles to keep track of their crocodiles. In the test we will **create** a user, **query** crocodiles, and **create**, **update** and **delete** a crocodile. The test also include [thresholds](https://docs.k6.io/docs/thresholds) and [checks](https://docs.k6.io/docs/checks)
 
 I've converted the test to TypeScript and broken it out into modules so it's easier to use and scale.
 
@@ -48,42 +48,44 @@ All the code can be found in the `src` folder. And is written in TypeScript usin
 
 ### **lib** folder
 
-Within this folder, the `lib` folder contains bespoke `types` and helper functions. It's highly recommended that you unit test your helper functions (e.g. with [Jest](https://jestjs.io/)). However I've not done that here, just to keep things simple.
+This folder contains bespoke `types` and helper functions. It's highly recommended that you unit test your helper functions (e.g. with [Jest](https://jestjs.io/)). However I've not done that here, just to keep things simple.
 
-To understand the k6 types, take a look at the [Definitely Typed Repository](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/k6)
+#### The types folder
+
+This currently contains an interface for a 'User' in the system, specifying that they need a first name, last name, username and password.
 
 ### **actions** folder
 
-The `actions` folder contains the requests for each user action. The `roles` folder (inside the `actions` folder) contains a file for each user type and the actions they can perform.
+The `actions` folder contains a script file for each user action. Each script file contains the requests that are sent when a user performs that particular action (e.g. login). The `roles` folder (inside the `actions` folder) contains a file for each user type and the actions they can perform.
 
-#### *User Types folder*
+#### *roles folder*
 
 There are three types of user (or roles) that use the Crocodile app. The first is a *public user* that isn't logged into the system. They can query crocodiles, but can't create, update or delete them. The second are *crocodile owners* who can log in and create, read and update crocodiles. The third are *admin* users who can create other users. The admin users don't need to log in, as this is just a dummy app.
 
 ### **tests** folder
 
-This is where you create your performance tests using the modules from the rest of the framework. `actions` are never called directly, but always through the 'role' performing them (see the `actions` folder above).
+This is where you create your performance tests using the modules from the rest of the framework. `actions` are never called directly, but always through the `role` performing them (see the `actions` and `roles` folders above).
 
-## Checking your Code
+## Checking your Code :100:
 
 Use `yarn check-types` to check your code against type safety and the rules set in your [tsconfig.json file](tsconfig.json). You can also have this running while you work using `yarn check-types:watch`.
 
 **PLEASE NOTE** I haven't set up `ESLint` and `Prettier` which this framework, but it's recommended that you do so.
 
-## Building your Code
+## Building your Code :factory:
 
-[Babel](https://babeljs.io/) handles the transpiling of the code (see the [.babelrc](.babelrc) file), while [Webpack](https://webpack.js.org/) builds it (see the [webpack.config.js](webpack.config.js) file in the root directory).
+[Babel](https://babeljs.io/) handles the transpiling of the code (see the [.babelrc](.babelrc) file in the root directory), while [Webpack](https://webpack.js.org/) builds it (see the [webpack.config.js](webpack.config.js) file in the root directory).
 
-## Debugging k6
+## Debugging k6 :bug:
 
 It's easy to debug `k6` scripts. See the [k6 documentation](https://docs.k6.io/docs/debugging) for more details.
 
-## Running in CI/CD Pipelines
+## Running in CI/CD Pipelines :gear:
 
 `k6` has been designed to work with your `CI/CD` pipeline whatever tool you're using. There are examples for [GitHub Actions](https://blog.loadimpact.com/load-testing-using-github-actions), [GitLab](https://blog.loadimpact.com/integrating-load-testing-with-gitlab), [CircleCI](https://github.com/loadimpact/k6-circleci-example), [Jenkins](https://github.com/loadimpact/k6-jenkins-example) and many others. 
 
 
-## Problems with this Framework
+## Problems with this Framework :anguished:
 
 If you notice any problems or improvements that could be made to this example framework, I accept PRs or you can raise an issue on the [k6 community forum](https://community.k6.io/)
 
