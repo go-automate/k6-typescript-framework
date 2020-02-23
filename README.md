@@ -72,7 +72,7 @@ Use `yarn check-types` to check your code against type safety and the rules set 
 
 **PLEASE NOTE** I haven't set up `ESLint` and `Prettier` which this framework, but it's recommended that you do so.
 
-## Building your Code :factory:
+## Building your Code
 
 [Babel](https://babeljs.io/) handles the transpiling of the code (see the [.babelrc](.babelrc) file in the root directory), while [Webpack](https://webpack.js.org/) builds it (see the [webpack.config.js](webpack.config.js) file in the root directory).
 
