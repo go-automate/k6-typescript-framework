@@ -11,7 +11,7 @@ Install dependencies using `yarn install` in the terminal (you need to have [yar
 
 Now run the test using the `yarn go:k6` command. This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using `k6`.
 
-### Run with Monitoring :chart_with_upwards_trend:
+### Run with Monitoring 
 
 Ensure you have [docker](https://www.docker.com/products/docker-desktop) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine.
 
@@ -80,12 +80,12 @@ Use `yarn check-types` to check your code against type safety and the rules set 
 
 It's easy to debug `k6` scripts. See the [k6 documentation](https://docs.k6.io/docs/debugging) for more details.
 
-## Running in CI/CD Pipelines :gear:
+## Running in CI/CD Pipelines 
 
 `k6` has been designed to work with your `CI/CD` pipeline whatever tool you're using. There are examples for [GitHub Actions](https://blog.loadimpact.com/load-testing-using-github-actions), [GitLab](https://blog.loadimpact.com/integrating-load-testing-with-gitlab), [CircleCI](https://github.com/loadimpact/k6-circleci-example), [Jenkins](https://github.com/loadimpact/k6-jenkins-example) and many others. 
 
 
-## Problems with this Framework :anguished:
+## Problems with this Framework 
 
 If you notice any problems or improvements that could be made to this example framework, I accept PRs or you can raise an issue on the [k6 community forum](https://community.k6.io/)
 
