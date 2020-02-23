@@ -1,7 +1,7 @@
 # k6 Typescript Framework
 A starter framework for k6 load tests written in TypeScript
 
-## Quick Start
+## Quick Start :zap:
 
 Install the [k6 performance test tool](https://docs.k6.io/docs/installation).
 
@@ -21,7 +21,7 @@ Add the [k6 dashboard](https://grafana.com/grafana/dashboards/2587) to `Grafana`
 
 Now run the test using the `yarn go:docker` command. This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using `k6` installed in a docker, which outputs the results to `influxDB`. `Grafana` is used to visualise the results.
 
-**Please NOTE:** If you're running in `Windows` you'll need to use the full path for the local directories in the [docker-compose.yaml](docker-compose.yml) file. See the [k6 documentation](https://docs.k6.io/docs/docker-on-windows) for more details.
+**Please NOTE:** If you're running in `Windows` you'll need to use the full path for the local directories in the `volumes` sections of the [docker-compose.yaml](docker-compose.yml) file. See the [k6 documentation](https://docs.k6.io/docs/docker-on-windows) for more details.
 
 
 ### Run the 'Seed' Script
@@ -86,3 +86,7 @@ It's easy to debug `k6` scripts. See the [k6 documentation](https://docs.k6.io/d
 ## Problems with this Framework
 
 If you notice any problems or improvements that could be made to this example framework, I accept PRs or you can raise an issue on the [k6 community forum](https://community.k6.io/)
+
+## TO DO
+
+I can't for the life of me get this framework working with k6's [base compatibility mode](https://github.com/MStoykov/k6-es6) for optimum performance. I'm putting this down to my lack of TypeScript and Webpack/Babel knowledge, so if anyone can solve this, please let me know or raise a PR!
