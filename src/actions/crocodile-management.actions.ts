@@ -3,19 +3,25 @@ import http, { RefinedBatchRequest, RefinedResponse } from "k6/http"
 
 import { randomCrocodile } from '../lib/test-data.helpers'
 import { setSleep } from "../lib/sleep.helpers";
+import { Crocodile } from "../lib/types/framework.types";
+import { CreateCrocodileResponseBody } from "../lib/types/crocodile.api";
+import { Counter } from "k6/metrics";
 
-export function createCrocodile( _requestConfigWithTag: any, _url: string ): string {
+export function createCrocodile( _requestConfigWithTag: any, _url: string, count: Counter ): string {
 
   group('Create crocs', () => {
 
     // body of the post request
-    const payload = randomCrocodile();
+    const payload: Crocodile = randomCrocodile();
 
-    const res = http.post(_url, payload, _requestConfigWithTag({ name: 'Create' }));
+    const res = http.post(_url, payload as {}, _requestConfigWithTag({ name: 'Create' }));
+
+    const createdCroc: CreateCrocodileResponseBody = JSON.parse(res.body as string);
 
     // check the crock is created
     if (check(res, { 'Croc created correctly': (r) => r.status === 201 })) {
-      _url = `${_url}${res.json('id')}/`;
+      _url = `${_url}${createdCroc.id}/`;
+      count.add(1);
     } else {
       fail(`Unable to create a Croc ${res.status} ${res.body}`);
     }
@@ -27,7 +33,7 @@ export function createCrocodile( _requestConfigWithTag: any, _url: string ): str
   return _url
 }
 
-export function updateCrocodile( _requestConfigWithTag: any, _url: string, _newName: string ){
+export function updateCrocodile( _requestConfigWithTag: any, _url: string, _newName: string, count: Counter ){
   group('Update croc', () => {
     const payload = { name: `${_newName}` };
     const res = http.patch(_url, payload, _requestConfigWithTag({ name: 'Update' }));
@@ -41,12 +47,13 @@ export function updateCrocodile( _requestConfigWithTag: any, _url: string, _newN
       console.log(`Unable to update the croc ${res.status} ${res.body}`);
       return
     }
+    count.add(1);
   });
 
   setSleep(0.5, 1);
 }
 
-export function deleteCrocodile( _requestConfigWithTag: any, _url: string ){
+export function deleteCrocodile( _requestConfigWithTag: any, _url: string, count: Counter ){
 
   group('Delete croc', () => {
   const delRes = http.del(_url, null, _requestConfigWithTag({ name: 'Delete' }));
@@ -57,15 +64,14 @@ export function deleteCrocodile( _requestConfigWithTag: any, _url: string ){
     console.log(`Croc was not deleted properly`);
     return
   }
+  count.add(1);
 })
 
 setSleep(0.5, 1);
 
 }
 
-export function queryCrocodiles(_url: string): RefinedResponse<"text">[]{
-
-  let responses: RefinedResponse<"text">[];
+export function queryCrocodiles(_url: string, responses:RefinedResponse<"text">[] ): RefinedResponse<"text">[]{
 
     // these dont need auth as they're public endpoints - all tagged with the same name and therefore will be tested by the same threshold
     group('Query Crocodiles', () => {
@@ -94,7 +100,7 @@ export function checkAges(_responses: RefinedResponse<"text">[], _minAge: number
 
   group('Functional Test: Check ages', () => {
         // get all the ages out of each of the responses
-        const ages: JSONValue[] = Object.values(_responses).map(res => res.json('age'));
+        const ages: JSONValue[] = Object.values(_responses).map(res => res.json('age')) as JSONValue[];
   
         // Functional test: check that all the public crocodiles are older than 5
         check(ages as number[], {

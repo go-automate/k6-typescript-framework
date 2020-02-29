@@ -4,6 +4,7 @@ import { Options } from 'k6/options';
 import { setSleep } from '../lib/sleep.helpers'
 
 import * as publicUserActions from '../actions/roles/public-user.role'
+import { RefinedResponse } from 'k6/http';
 
 /**
  * This is an example LOAD script. 
@@ -33,7 +34,8 @@ export default () => {
   // this is a group https://docs.k6.io/docs/tags-and-groups
   group('Query Crocs', () => {
 
-    publicUserActions.queryCrocodiles(BASE_URL);
+    let responses: RefinedResponse<"text">[] = [];
+    publicUserActions.queryCrocodiles(BASE_URL, responses);
 
   })
 

@@ -40,7 +40,7 @@
 
   "include": [
 
-      "framework"
+      "src"
 
   ]
 

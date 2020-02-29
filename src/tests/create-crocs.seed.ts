@@ -5,11 +5,12 @@ import { randomString } from '../lib/test-data.helpers'
 import { createRequestConfigWithTag } from '../lib/request.helpers';
 import { setSleep } from '../lib/sleep.helpers'
 
-import { User } from '../lib/types/users'
+import { User } from '../lib/types/framework.types'
 
 import * as crocodileOwnerActions from '../actions/roles/crocodile-owner.role'
 import * as adminActions from '../actions/roles/admin.role'
 import * as publicUserActions from '../actions/roles/public-user.role'
+import { Counter } from 'k6/metrics';
 
 /**
  * This is a SEEDING script. Do not run as a performance test. 
@@ -24,6 +25,8 @@ export let options: Partial<Options> = {
  // This script runs for 5 iterations and therefore creates 5 crocodiles.
  iterations: 5
 };
+
+let numberOfCrocodilesCreated = new Counter("NumberOfCrocodilesCreated")
 
 const CROCODILE_OWNER: User = {
   first_name: "Crocodile",
@@ -48,7 +51,7 @@ export function setup() {
 }
 
 // default function (imports the Bearer token) https://docs.k6.io/docs/test-life-cycle
-export default (_authToken) => {
+export default (_authToken: string) => {
 
   // Private actions - you need to be logged in to do these
   group('Create crocs', () => {
@@ -58,7 +61,7 @@ export default (_authToken) => {
     let URL = `${BASE_URL}/my/crocodiles/`;
 
     // returns an updated URL that contains the crocodile ID - could be saved to an array and eventually to a JSON file for use in performance tests.
-    crocodileOwnerActions.createCrocodile(requestConfigWithTag, URL);
+    crocodileOwnerActions.createCrocodile(requestConfigWithTag, URL, numberOfCrocodilesCreated);
 
   });
 

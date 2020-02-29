@@ -5,11 +5,13 @@ import { randomString } from '../lib/test-data.helpers'
 import { createRequestConfigWithTag } from '../lib/request.helpers';
 import { setSleep } from '../lib/sleep.helpers'
 
-import { User } from '../lib/types/users'
+import { User } from '../lib/types/framework.types'
 
 import * as crocodileOwnerActions from '../actions/roles/crocodile-owner.role'
 import * as adminActions from '../actions/roles/admin.role'
 import * as publicUserActions from '../actions/roles/public-user.role'
+import { Counter } from 'k6/metrics';
+import { RefinedResponse } from 'k6/http';
 
 /**
  * A soak test that runs through some common user actions 
@@ -28,11 +30,15 @@ export let options: Partial<Options> = {
  ],
  // test thresholds https://docs.k6.io/docs/thresholds
   thresholds: {
-    'http_req_duration': ['p(95)<500', 'p(99)<1500'],
+    'http_req_duration': ['avg<500', 'p(95)<1500'],
     'http_req_duration{name:PublicCrocs}': ['avg<400'],
     'http_req_duration{name:Create}': ['avg<600', 'max<2000'],
   },
 };
+
+let numberOfCrocodilesCreated = new Counter("NumberOfCrocodilesCreated");
+let numberOfCrocodilesDeleted = new Counter("NumberOfCrocodilesDeleted");
+let numberOfCrocodilesUpdated = new Counter("NumberOfCrocodilesUpdated");
 
 const CROCODILE_OWNER: User = {
   first_name: "Crocodile",
@@ -57,13 +63,14 @@ export function setup() {
 }
 
 // default function (imports the Bearer token) https://docs.k6.io/docs/test-life-cycle
-export default (_authToken) => {
+export default (_authToken:string) => {
 
   // Public actions - you don't need to be logged in to perform these
   // this is a group https://docs.k6.io/docs/tags-and-groups
   group('Query and Check Crocs', () => {
 
-    const responses = publicUserActions.queryCrocodiles(BASE_URL);
+    let responses: RefinedResponse<"text">[] = [];
+    responses = publicUserActions.queryCrocodiles(BASE_URL, responses);
     publicUserActions.checkAges(responses, 5)
 
   })
@@ -75,11 +82,11 @@ export default (_authToken) => {
     let URL = `${BASE_URL}/my/crocodiles/`;
 
     // returns an updated URL that contains the crocodile ID
-    URL = crocodileOwnerActions.createCrocodile(requestConfigWithTag, URL);
+    URL = crocodileOwnerActions.createCrocodile(requestConfigWithTag, URL, numberOfCrocodilesCreated);
 
-    crocodileOwnerActions.updateCrocodile(requestConfigWithTag, URL, "New Name");
+    crocodileOwnerActions.updateCrocodile(requestConfigWithTag, URL, "New Name", numberOfCrocodilesUpdated);
     
-    crocodileOwnerActions.deleteCrocodile(requestConfigWithTag, URL);
+    crocodileOwnerActions.deleteCrocodile(requestConfigWithTag, URL, numberOfCrocodilesDeleted);
 
   });
 

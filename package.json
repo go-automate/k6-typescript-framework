@@ -14,7 +14,7 @@
     "seed": "docker-compose run --rm k6 run /scripts/seedCrocs.bundle.js",
     "loadtest:queries": "docker-compose run -d --rm k6 run /scripts/loadQueries.bundle.js & docker-compose run --rm k6 run /scripts/soakTest.bundle.js",
     "go:docker": "yarn build && yarn test",
-    "go:k6": "yarn build && k6 run src/tests/query-crocs.load.ts"
+    "go:k6": "yarn build && k6 run dist/soakTest.bundle.js"
   },
   "dependencies": {
     "@types/k6": "^0.25.1",
