@@ -1,0 +1,20 @@
+[
+  {
+    "name": "croc1",
+    "sex": "male",
+    "date_of_birth": "2001-01-01",
+    "age": 2
+  },
+  {
+    "name": "croc2",
+    "sex": "male",
+    "date_of_birth": "2001-01-01",
+    "age": 5
+  },
+  {
+    "name": "croc3",
+    "sex": "male",
+    "date_of_birth": "2001-01-01",
+    "age": 3
+  }
+]
