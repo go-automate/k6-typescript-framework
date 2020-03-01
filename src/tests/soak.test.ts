@@ -25,9 +25,9 @@ import { Counter } from 'k6/metrics';
 // Test Options https://docs.k6.io/docs/options
 export let options: Partial<Options> = {
  // a single stage where we ramp up to 10 users over 30 seconds 
-//  stages: [
-//    { target: 10, duration: '30s' },
-//  ],
+ stages: [
+   { target: 10, duration: '30s' },
+ ],
  // test thresholds https://docs.k6.io/docs/thresholds
   thresholds: {
     'http_req_duration': ['avg<500', 'p(95)<1500'],
