@@ -1,10 +1,9 @@
-import { group, check, fail, JSONValue } from "k6";
-import http, { RefinedBatchRequest, RefinedResponse } from "k6/http"
+import { group, check, fail } from "k6";
+import http from "k6/http"
 
 import { randomCrocodile } from '../lib/test-data.helpers'
 import { setSleep } from "../lib/sleep.helpers";
-import { Crocodile } from "../lib/types/framework.types";
-import { CreateCrocodileResponseBody } from "../lib/types/crocodile.api";
+import { Crocodile } from "../lib/types/crocodile.api";
 import { Counter } from "k6/metrics";
 
 export function createCrocodile( _requestConfigWithTag: any, _url: string, count: Counter ): string {
@@ -16,7 +15,7 @@ export function createCrocodile( _requestConfigWithTag: any, _url: string, count
 
     const res = http.post(_url, payload as {}, _requestConfigWithTag({ name: 'Create' }));
 
-    const createdCroc: CreateCrocodileResponseBody = JSON.parse(res.body as string);
+    const createdCroc: Crocodile = JSON.parse(res.body as string);
 
     // check the crock is created
     if (check(res, { 'Croc created correctly': (r) => r.status === 201 })) {
@@ -71,12 +70,12 @@ setSleep(0.5, 1);
 
 }
 
-export function queryCrocodiles(_url: string, responses:RefinedResponse<"text">[] ): RefinedResponse<"text">[]{
+export function queryCrocodiles(_url: string, crocs:Crocodile[]): Crocodile[]{
 
     // these dont need auth as they're public endpoints - all tagged with the same name and therefore will be tested by the same threshold
     group('Query Crocodiles', () => {
       // call some public endpoints in a batch request https://docs.k6.io/docs/batch-requests
-      responses = http.batch([
+      let responses = http.batch([
         ['GET', `${_url}/public/crocodiles/1/`, null, {tags: {name: 'PublicCrocs'}}],
         ['GET', `${_url}/public/crocodiles/2/`, null, {tags: {name: 'PublicCrocs'}}],
         ['GET', `${_url}/public/crocodiles/3/`, null, {tags: {name: 'PublicCrocs'}}],
@@ -87,20 +86,21 @@ export function queryCrocodiles(_url: string, responses:RefinedResponse<"text">[
         check(responses[i], {
           'Query successful': () => responses[i].status === 200
         });
+        crocs.push(JSON.parse(responses[i].body as string))
       }
 
     });
 
     setSleep(0.5, 1);
 
-    return responses;
+    return crocs;
 }
 
-export function checkAges(_responses: RefinedResponse<"text">[], _minAge: number ){
+export function checkAges(_crocs: Crocodile[], _minAge: number ){
 
   group('Functional Test: Check ages', () => {
         // get all the ages out of each of the responses
-        const ages: JSONValue[] = Object.values(_responses).map(res => res.json('age')) as JSONValue[];
+        const ages = Object.values(_crocs).map(croc => croc.age);
   
         // Functional test: check that all the public crocodiles are older than 5
         check(ages as number[], {

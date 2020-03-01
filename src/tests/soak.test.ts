@@ -5,13 +5,13 @@ import { randomString } from '../lib/test-data.helpers'
 import { createRequestConfigWithTag } from '../lib/request.helpers';
 import { setSleep } from '../lib/sleep.helpers'
 
+import { Crocodile } from '../lib/types/crocodile.api'
 import { User } from '../lib/types/framework.types'
 
 import * as crocodileOwnerActions from '../actions/roles/crocodile-owner.role'
 import * as adminActions from '../actions/roles/admin.role'
 import * as publicUserActions from '../actions/roles/public-user.role'
 import { Counter } from 'k6/metrics';
-import { RefinedResponse } from 'k6/http';
 
 /**
  * A soak test that runs through some common user actions 
@@ -69,9 +69,9 @@ export default (_authToken:string) => {
   // this is a group https://docs.k6.io/docs/tags-and-groups
   group('Query and Check Crocs', () => {
 
-    let responses: RefinedResponse<"text">[] = [];
-    responses = publicUserActions.queryCrocodiles(BASE_URL, responses);
-    publicUserActions.checkAges(responses, 5)
+    let crocodiles: Crocodile[] = [];
+    crocodiles = publicUserActions.queryCrocodiles(BASE_URL, crocodiles);
+    publicUserActions.checkAges(crocodiles, 5)
 
   })
 

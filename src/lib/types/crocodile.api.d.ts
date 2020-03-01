@@ -3,10 +3,10 @@ export interface LoginResponseBody {
   "access": string;
 }
 
-export interface CreateCrocodileResponseBody{
-  "id": number,
+export interface Crocodile{
+  "id"?: number,
   "name": string,
   "sex": string,
   "date_of_birth": string,
-  "age": number
+  "age"?: number
 }

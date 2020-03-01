@@ -4,9 +4,3 @@ export interface User {
   username:string;
   password:string;
 }
-
-export interface Crocodile {
-    name: string,
-    sex: string,
-    date_of_birth: string,
-}
