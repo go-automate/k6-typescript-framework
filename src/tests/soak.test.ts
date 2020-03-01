@@ -41,8 +41,9 @@ let numberOfCrocodilesDeleted = new Counter("NumberOfCrocodilesDeleted");
 let numberOfCrocodilesUpdated = new Counter("NumberOfCrocodilesUpdated");
 
 /**
- * Example of importing JSON data - PLEASE NOTE we don't use this data, it's just to show how to do it
- * Webpack will automatically convert this to a JS object (don't need JSON.parse)
+ * Example of importing data from a file - PLEASE NOTE we don't use this data, it's just to show how to do it
+ * i.e. don't use the k6 'open()' function.
+ * Webpack will automatically convert JSON to a JS object (don't need JSON.parse)
  * */ 
 const crocodilesFromJson = require('../data/crocodiles.json')
 
