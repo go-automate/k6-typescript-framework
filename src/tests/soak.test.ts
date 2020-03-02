@@ -40,6 +40,14 @@ let numberOfCrocodilesCreated = new Counter("NumberOfCrocodilesCreated");
 let numberOfCrocodilesDeleted = new Counter("NumberOfCrocodilesDeleted");
 let numberOfCrocodilesUpdated = new Counter("NumberOfCrocodilesUpdated");
 
+// Have these as gauges
+// Create a map that has 'vu' and 'count'
+// Then update the gauge with the count and then tag it with the vu both from the map
+
+let countCrocs = new Map(); 
+let countDeleted = new Map(); 
+let countUpdated = new Map(); 
+
 /**
  * Example of importing data from a file - PLEASE NOTE we don't use this data, it's just to show how to do it
  * i.e. don't use the k6 'open()' function.
@@ -83,7 +91,7 @@ export default (_authToken:string) => {
   })
 
   // Private actions - you need to be logged in to do these
-  group('Create and modify crocs', () => {
+  group('Create and Modify Crocs', () => {
 
     const requestConfigWithTag = createRequestConfigWithTag(_authToken); // Sets the auth token in the header of requests and the 'public requests' tag
     let URL = `${BASE_URL}/my/crocodiles/`;

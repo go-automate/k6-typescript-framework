@@ -8,7 +8,7 @@ import { Counter } from "k6/metrics";
 
 export function createCrocodile( _requestConfigWithTag: any, _url: string, count: Counter ): string {
 
-  group('Create crocs', () => {
+  group('Create Crocs', () => {
 
     // body of the post request
     const payload: Crocodile = randomCrocodile();
@@ -33,7 +33,7 @@ export function createCrocodile( _requestConfigWithTag: any, _url: string, count
 }
 
 export function updateCrocodile( _requestConfigWithTag: any, _url: string, _newName: string, count: Counter ){
-  group('Update croc', () => {
+  group('Update Croc', () => {
     const payload = { name: `${_newName}` };
     const res = http.patch(_url, payload, _requestConfigWithTag({ name: 'Update' }));
     const isSuccessfulUpdate = check(res, {
@@ -54,7 +54,7 @@ export function updateCrocodile( _requestConfigWithTag: any, _url: string, _newN
 
 export function deleteCrocodile( _requestConfigWithTag: any, _url: string, count: Counter ){
 
-  group('Delete croc', () => {
+  group('Delete Croc', () => {
   const delRes = http.del(_url, null, _requestConfigWithTag({ name: 'Delete' }));
   const isSuccessfulDelete = check(null, {
     'Croc was deleted correctly': () => delRes.status === 204,
@@ -98,7 +98,7 @@ export function queryCrocodiles(_url: string, crocs:Crocodile[]): Crocodile[]{
 
 export function checkAges(_crocs: Crocodile[], _minAge: number ){
 
-  group('Functional Test: Check ages', () => {
+  group('Functional Test: Check Ages', () => {
         // get all the ages out of each of the responses
         const ages = Object.values(_crocs).map(croc => croc.age);
   
