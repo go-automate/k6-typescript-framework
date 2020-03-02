@@ -34,7 +34,7 @@
 
       "noImplicitThis": true,
 
-      "strictNullChecks": true
+      "strictNullChecks": true,
 
   },
 

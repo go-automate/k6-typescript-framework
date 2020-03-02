@@ -1,5 +1,7 @@
 # k6 Typescript Framework
-A starter framework for k6 load tests written in TypeScript
+A starter framework for k6 load tests written in TypeScript.
+
+We'll be using the [LoadImpact Test API](https://test-api.loadimpact.com/) as the website we'll be testing. This is a dummy application/api for crocodiles owners to use who want to keep track of their crocodiles. In the test we will **create a user**, **query** some crocodiles, and **create**, **update** and **delete** a crocodile.
 
 ## Quick Start :zap:
 
@@ -7,30 +9,50 @@ Install the [k6 performance test tool](https://docs.k6.io/docs/installation).
 
 Clone this repository and open in the IDE of your choice.
 
-Install dependencies using `yarn install` in the terminal (you need to have [yarn](https://yarnpkg.com/getting-started/install) installed on your machine).
+Install dependencies using: 
 
-Now run the test using the `yarn go:k6` command. This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using `k6`.
+`yarn install` 
 
-### Run with Monitoring 
+in the terminal (you need to have [yarn](https://yarnpkg.com/getting-started/install) installed on your machine).
+
+Now run the test using the following command: 
+
+`yarn go:k6` 
+
+This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using **k6**.
+
+## Run with Monitoring 
+
+![Grafana Dashboard](https://grafana.com/api/dashboards/11837/images/7658/image)
 
 Ensure you have [docker](https://www.docker.com/products/docker-desktop) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine.
 
-Start the monitors using the `yarn monitors` command. Go to `localhost:3000` in your browser to login to Grafana with the username `admin` and the password `admin`.
+Start the monitors using the following command: 
 
-Add the [k6 dashboard](https://grafana.com/grafana/dashboards/2587) to `Grafana` by following these instructions: [Exporting a Dashboad](https://grafana.com/docs/grafana/latest/reference/export_import/)
+`yarn monitors` 
 
-Now run the test using the `yarn go:docker` command. This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using `k6` installed in a docker, which outputs the results to `influxDB`. `Grafana` is used to visualise the results.
+Go to **localhost:3000** in your browser to login to Grafana with the username '**admin**' and the password '**admin**'.
 
-**Please NOTE:** If you're running in `Windows` you'll need to use the full path for the local directories in the `volumes` sections of the [docker-compose.yaml](docker-compose.yml) file. See the [k6 documentation](https://docs.k6.io/docs/docker-on-windows) for more details.
+Add the [k6 dashboard](https://grafana.com/grafana/dashboards/11837) to **Grafana** by following these instructions: [Importing a Dashboad](https://grafana.com/docs/grafana/latest/reference/export_import/)
+
+Now run the test using the following command: 
+
+`yarn go:docker` 
+
+This will run the [soak.test.ts](/src/tests/soak.test.ts) script, using **k6** installed in a docker, which outputs the results to **influxDB**. **Grafana** is used to visualise the results.
+
+**Please NOTE:** If you're running in **Windows** you'll need to use the full path for the local directories in the **volumes** sections of the [docker-compose.yaml](docker-compose.yml) file. See the [k6 documentation](https://docs.k6.io/docs/docker-on-windows) for more details.
 
 
-### Run the 'Seed' Script
+## Run the 'Seed' Script
 
-This is an example of a script that you could use to 'seed' the application with test data before you run your performance tests [create-crocs.seed.ts](src/tests/create-crocs.seed.ts). You can run it using `yarn seed`.
+[create-crocs.seed.ts](src/tests/create-crocs.seed.ts)
 
-### Run the 'Load' Test
+This is an example of a script that you could use to 'seed' the application with test data before you run your performance tests. You can run it using the following command:
 
-The `yarn loadtest:queries` will run two scripts simultaneously. The main [soak.test.ts](src/tests/soak.test.ts) script will be run, alongside the [query-crocs.load.ts](/src/tests/query-crocs.load.ts) script, which will be run in the background applying load to the system.
+`yarn seed`.
+
+This is just an example script and not needed for the test.
 
 ## The Test Framework :white_check_mark:
 
@@ -38,7 +60,11 @@ The test is based on the following sample script and API provided by k6:
 
 https://test-api.loadimpact.com/
 
-This is a dummy application/api for people who own crocodiles to keep track of their crocodiles. In the test we will **create** a user, **query** crocodiles, and **create**, **update** and **delete** a crocodile. The test also include [thresholds](https://docs.k6.io/docs/thresholds) and [checks](https://docs.k6.io/docs/checks)
+This is a dummy api for people who own crocodiles to keep track of their crocodiles. 
+
+![Crocodile Pic](https://images.pexels.com/photos/207001/pexels-photo-207001.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260, "Photo by Pixabay from Pexels")
+
+In the test we will **create** a user, **query** crocodiles, and **create**, **update** and **delete** a crocodile. The test also include [thresholds](https://docs.k6.io/docs/thresholds) and [checks](https://docs.k6.io/docs/checks)
 
 I've converted the test to TypeScript and broken it out into modules so it's easier to use and scale.
 
@@ -68,7 +94,13 @@ This is where you create your performance tests using the modules from the rest 
 
 ## Checking your Code :100:
 
-Use `yarn check-types` to check your code against type safety and the rules set in your [tsconfig.json file](tsconfig.json). You can also have this running while you work using `yarn check-types:watch`.
+Use: 
+
+`yarn check-types` 
+
+to check your code against type safety and the rules set in your [tsconfig.json file](tsconfig.json). You can also have this running while you work using: 
+
+`yarn check-types:watch`.
 
 **PLEASE NOTE** I haven't set up `ESLint` and `Prettier` which this framework, but it's recommended that you do so.
 

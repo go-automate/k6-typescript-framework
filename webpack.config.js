@@ -14,7 +14,6 @@ module.exports = {
 
         soakTest: './src/tests/soak.test.ts',
         seedCrocs: './src/tests/create-crocs.seed.ts',
-        loadQueries: './src/tests/query-crocs.load.ts',
 
     },
 

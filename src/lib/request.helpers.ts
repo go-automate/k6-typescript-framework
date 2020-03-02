@@ -2,7 +2,7 @@ import { JSONValue } from "k6";
 
 export function createRequestConfigWithTag(_authToken: JSONValue){
     // the headers and tags needed for logged-in request https://docs.k6.io/docs/http-requests
-    return tag => ({
+    return (tag:{ [key: string]: string; }) => ({
       headers: {
         Authorization: `Bearer ${_authToken}`
       },
