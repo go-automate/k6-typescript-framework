@@ -92,7 +92,7 @@ There are three types of user (or roles) that use the Crocodile app. The first i
 
 This is where you create your performance tests using the modules from the rest of the framework. `actions` are never called directly, but always through the `role` performing them (see the `actions` and `roles` folders above).
 
-## Checking your Code :100:
+## Checking your Code
 
 Use: 
 
