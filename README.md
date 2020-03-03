@@ -72,7 +72,7 @@ Here's the high-level architecture diagram for the framework:
 
 ![Framework Diagram](images/FrameworkDiagram.png)
 
-You can see from the framework diagram above, that k6 modules allow for a lot of code re-use. Let's go into more detail about each of the folders and what they do.
+As you can see from the framework diagram above, k6 modules allow for a lot of code re-use. Let's go into more detail about each of the folders and what they do.
 
 ### **src** folder
 
