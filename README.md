@@ -68,6 +68,12 @@ In the test we will **create** a user, **query** crocodiles, and **create**, **u
 
 I've converted the test to TypeScript and broken it out into modules so it's easier to use and scale.
 
+Here's the high-level architecture diagram for the framework:
+
+![Framework Diagram](images/FrameworkDiagram.png)
+
+You can see from the framework diagram above, that k6 modules allow for a lot of code re-use. Let's go into more detail about each of the folders and what they do.
+
 ### **src** folder
 
 All the code can be found in the `src` folder. And is written in TypeScript using [types provided by k6](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/k6).
