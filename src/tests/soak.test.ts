@@ -14,17 +14,17 @@ import * as publicUserActions from '../actions/roles/public-user.role'
 import { Counter } from 'k6/metrics';
 
 /**
- * A soak test that runs through some common user actions 
+ * A soak test that runs through some common user actions
  * for the Crocodile App:
  * https://test-api.loadimpact.com/
- * 
- * P.s. the k6 Types can be found here for reference: 
+ *
+ * P.s. the k6 Types can be found here for reference:
  * https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/k6
  */
 
 // Test Options https://docs.k6.io/docs/options
 export let options: Partial<Options> = {
- // a single stage where we ramp up to 10 users over 30 seconds 
+ // a single stage where we ramp up to 10 users over 30 seconds
  stages: [
    { target: 20, duration: '3m' },
  ],
@@ -44,15 +44,15 @@ let numberOfCrocodilesUpdated = new Counter("NumberOfCrocodilesUpdated");
 // Create a map that has 'vu' and 'count'
 // Then update the gauge with the count and then tag it with the vu both from the map
 
-let countCrocs = new Map(); 
-let countDeleted = new Map(); 
-let countUpdated = new Map(); 
+let countCrocs = new Map();
+let countDeleted = new Map();
+let countUpdated = new Map();
 
 /**
  * Example of importing data from a file - PLEASE NOTE we don't use this data, it's just to show how to do it
  * i.e. don't use the k6 'open()' function.
  * Webpack will automatically convert JSON to a JS object (don't need JSON.parse)
- * */ 
+ * */
 const crocodilesFromJson = require('../data/crocodiles.json')
 
 const CROCODILE_OWNER: User = {
@@ -62,7 +62,7 @@ const CROCODILE_OWNER: User = {
   password: 'superCroc2019'
 }
 
-const BASE_URL = 'https://test-api.loadimpact.com';
+const BASE_URL = 'https://test-api.k6.io';
 
 // The Setup Function is run once before the Load Test https://docs.k6.io/docs/test-life-cycle
 export function setup() {
@@ -100,11 +100,11 @@ export default (_authToken:string) => {
     URL = crocodileOwnerActions.createCrocodile(requestConfigWithTag, URL, numberOfCrocodilesCreated);
 
     crocodileOwnerActions.updateCrocodile(requestConfigWithTag, URL, "New Name", numberOfCrocodilesUpdated);
-    
+
     crocodileOwnerActions.deleteCrocodile(requestConfigWithTag, URL, numberOfCrocodilesDeleted);
 
   });
 
   // sleeps help keep your script realistic https://docs.k6.io/docs/sleep-t-1
   setSleep();
-} 
+}
