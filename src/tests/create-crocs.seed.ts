@@ -16,7 +16,7 @@ import { Counter } from 'k6/metrics';
  * This is a SEEDING script. Do not run as a performance test. 
  * 
  * It creates crocodiles on the following app:
- * https://test-api.loadimpact.com/
+ * https://test-api.k6.io/
  * for use by the performance tests (a Soak test in this case).
  */
 
@@ -35,7 +35,7 @@ const CROCODILE_OWNER: User = {
   password: 'superCroc2019'
 }
 
-const BASE_URL = 'https://test-api.loadimpact.com';
+const BASE_URL = 'https://test-api.k6.io';
 
 // The Setup Function is run once before the Load Test https://docs.k6.io/docs/test-life-cycle
 export function setup() {

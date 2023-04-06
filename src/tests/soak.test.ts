@@ -16,7 +16,7 @@ import { Counter } from 'k6/metrics';
 /**
  * A soak test that runs through some common user actions 
  * for the Crocodile App:
- * https://test-api.loadimpact.com/
+ * https://test-api.k6.io/
  * 
  * P.s. the k6 Types can be found here for reference: 
  * https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/k6
@@ -62,7 +62,7 @@ const CROCODILE_OWNER: User = {
   password: 'superCroc2019'
 }
 
-const BASE_URL = 'https://test-api.loadimpact.com';
+const BASE_URL = 'https://test-api.k6.io';
 
 // The Setup Function is run once before the Load Test https://docs.k6.io/docs/test-life-cycle
 export function setup() {

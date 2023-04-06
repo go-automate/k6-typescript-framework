@@ -1,7 +1,7 @@
 # k6 Typescript Framework
 A starter framework for k6 load tests written in TypeScript.
 
-We'll be using the [LoadImpact Test API](https://test-api.loadimpact.com/) as the website we'll be testing. This is a dummy application/api for crocodiles owners to use who want to keep track of their crocodiles. In the test we will **create a user**, **query** some crocodiles, and **create**, **update** and **delete** a crocodile.
+We'll be using the [k6 Test API](https://test-api.k6.io) as the website we'll be testing. This is a dummy application/api for crocodiles owners to use who want to keep track of their crocodiles. In the test we will **create a user**, **query** some crocodiles, and **create**, **update** and **delete** a crocodile.
 
 ## Quick Start :zap:
 
@@ -58,7 +58,7 @@ This is just an example script and not needed for the test.
 
 The test is based on the following sample script and API provided by k6:
 
-https://test-api.loadimpact.com/
+https://test-api.k6.io/
 
 This is a dummy api for people who own crocodiles to keep track of their crocodiles. 
 
@@ -120,7 +120,7 @@ It's easy to debug `k6` scripts. See the [k6 documentation](https://docs.k6.io/d
 
 ## Running in CI/CD Pipelines 
 
-`k6` has been designed to work with your `CI/CD` pipeline whatever tool you're using. There are examples for [GitHub Actions](https://blog.loadimpact.com/load-testing-using-github-actions), [GitLab](https://blog.loadimpact.com/integrating-load-testing-with-gitlab), [CircleCI](https://github.com/loadimpact/k6-circleci-example), [Jenkins](https://github.com/loadimpact/k6-jenkins-example) and many others. 
+`k6` has been designed to work with your `CI/CD` pipeline whatever tool you're using. There are examples for [GitHub Actions](https://k6.io/blog/load-testing-using-github-actions), [GitLab](https://k6.io/blog/integrating-load-testing-with-gitlab), [CircleCI](https://github.com/loadimpact/k6-circleci-example), [Jenkins](https://github.com/loadimpact/k6-jenkins-example) and many others.
 
 
 ## Problems with this Framework 
